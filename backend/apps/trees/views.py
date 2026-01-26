@@ -31,7 +31,7 @@ def tree_list(request, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['GET','PUT','DELETE'])
-def users_detail(request, pk, format=None):
+def tree_detail(request, pk, format=None):
 
     try:
         trees = Trees.objects.get(pk=pk)
