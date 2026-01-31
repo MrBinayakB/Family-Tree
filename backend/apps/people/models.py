@@ -1,5 +1,5 @@
 from django.db import models
-from trees.models import Trees
+from apps.trees.models import Trees
 class People(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     firstname = models.CharField(max_length=100, null=False)
