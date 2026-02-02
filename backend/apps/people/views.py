@@ -26,7 +26,7 @@ def people_list(request, format=None):
             logger.info("People list fetched successfully")
             return Response(serializer.data)
         
-        except Exception as e:
+        except Exception:
             logger.error("Error while fetching people list",exc_info=True)
             return Response({"error":"something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

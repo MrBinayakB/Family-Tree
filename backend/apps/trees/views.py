@@ -29,8 +29,7 @@ def tree_list(request, format=None):
         
         except Exception:
             logger.error("Error while fetching tree list", exc_info=True)
-            return Response(
-                {"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     
     elif request.method == 'POST':
