@@ -6,6 +6,6 @@ class People(models.Model):
     familyname = models.CharField(max_length=100, null=False)
     birth_date = models.DateField()
     is_living = models.BooleanField()
-    death_date = models.DateField()
+    death_date = models.DateField(null=True,blank=True)
     gender = models.CharField(max_length=10)
     tree = models.ForeignKey(Trees, on_delete=models.CASCADE)
