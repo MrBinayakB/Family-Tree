@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'drf_yasg',
+
     'apps.people',
     'apps.relationship',
     'apps.trees',
@@ -217,4 +219,10 @@ LOGGING = {
         "handlers": ["console", "file", "error_file"],
         "level": "INFO",
     },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
 }
