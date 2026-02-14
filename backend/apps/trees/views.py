@@ -5,11 +5,12 @@ from apps.trees.models import Trees
 from .serializers import TreeSerializer
 from django.db.models import Q
 import logging
+from rest_framework.permissions import IsAuthenticated
 
 logger = logging.getLogger("apps.trees")
 
 class TreeList(APIView):
-
+    permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         logger.info("GET /trees/ requested")
 
@@ -49,7 +50,7 @@ class TreeList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TreeDetail(APIView):
-
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Trees.objects.get(pk=pk)

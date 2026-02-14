@@ -5,11 +5,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from apps.users.models import User
 from .serializers import UserSerializer
+from rest_framework.permissions import IsAuthenticated
 
 logger = logging.getLogger("apps.users")
 
 class UserList(APIView):
-
+    permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         logger.info("GET /users/ requested")
 
@@ -49,7 +50,7 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserDetail(APIView):
-
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return User.objects.get(pk=pk)

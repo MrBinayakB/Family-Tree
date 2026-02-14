@@ -5,10 +5,12 @@ from apps.relationship.models import Relation
 from .serializers import RelationSerializer
 from django.db.models import Q
 import logging
+from rest_framework.permissions import IsAuthenticated
 
 logger = logging.getLogger("apps.relationship")
 
 class RelationList(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         logger.info("GET /relations/ requested")
@@ -48,7 +50,8 @@ class RelationList(APIView):
         logger.warning(f"Invalid relation data: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class RelationDetail(APIView):
-
+    permission_classes = [IsAuthenticated]
+    
     def get_object(self, pk):
         try:
             return Relation.objects.get(pk=pk)
