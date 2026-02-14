@@ -1,15 +1,17 @@
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from apps.people.models import People
 from .serializers import PeopleSerializer
 #from .filters import PeopleFilter
 from django.db.models import Q
 import logging
+from rest_framework.permissions import IsAuthenticated
 
 logger = logging.getLogger("apps.people")
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def people_list(request, format=None):
     if request.method == 'GET':
         logger.info("GET / people / requested")
@@ -44,6 +46,7 @@ def people_list(request, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['GET','PUT','DELETE'])
+@permission_classes([IsAuthenticated])
 def people_detail(request, pk, format=None):
     logger.info(f"Request on /people/{pk}/ with method {request.method}")
 
