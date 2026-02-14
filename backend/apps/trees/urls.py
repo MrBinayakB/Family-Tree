@@ -1,9 +1,7 @@
 from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
-from . import views
+from .views import TreeList, TreeDetail
 
 urlpatterns = [
-    path('tree/',views.tree_list),
-    path('tree/<int:pk>',views.tree_detail),
+    path('trees/', TreeList.as_view(), name='tree-list'),
+    path('trees/<int:pk>/', TreeDetail.as_view(), name='tree-detail'),
 ]
-urlpatterns = format_suffix_patterns(urlpatterns)

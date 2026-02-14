@@ -1,9 +1,7 @@
 from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
-from . import views
+from .views import UserList, UserDetail
 
-urlpatterns = [   
-    path('user/',views.user_list),
-    path('user/<int:pk>',views.users_detail),
+urlpatterns = [
+    path('users/', UserList.as_view(), name='user-list'),
+    path('users/<int:pk>/', UserDetail.as_view(), name='user-detail'),
 ]
-urlpatterns = format_suffix_patterns(urlpatterns)
