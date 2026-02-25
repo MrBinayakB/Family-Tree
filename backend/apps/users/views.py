@@ -4,13 +4,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from apps.users.models import User
-from .serializers import UserSerializer
-from rest_framework.permissions import IsAuthenticated
+from .serializers import UserSerializer, UserRegisterSerializer
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 logger = logging.getLogger("apps.users")
 
 class UserList(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     def get(self, request, format=None):
         logger.info("GET /users/ requested")
 
@@ -40,7 +40,7 @@ class UserList(APIView):
     def post(self, request, format=None):
         logger.info("POST /users/ requested")
 
-        serializer = UserSerializer(data=request.data)
+        serializer = UserRegisterSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             logger.info("New user created successfully")
